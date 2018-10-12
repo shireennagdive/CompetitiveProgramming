@@ -1,30 +1,40 @@
-import java.util.*;
-class Solution {
-    public int romanToInt(String s) {
-        Map<String,Integer> fixedPrefixValues = new HashMap<>();
-        Map<String,Integer> symbolValues = new HashMap<>();
-        int value=0;
-        fixedPrefixValues.put("IV",4);
-        fixedPrefixValues.put("IX",9);
-        fixedPrefixValues.put("XL",40);
-        fixedPrefixValues.put("XC",90);
-        fixedPrefixValues.put("CD",400); //"MCDLXXVI" 1000+500+50+10+10+6
-        fixedPrefixValues.put("CM",900);
-        symbolValues.put("I",1);
-        symbolValues.put("V",5);
-        symbolValues.put("X",10);
-        symbolValues.put("L",50);
-        symbolValues.put("C",100);
-        symbolValues.put("D",500);
-        symbolValues.put("M",1000);
-        for(int i=0;i<s.length();i++){
-            if(i!=s.length()-1 && fixedPrefixValues.containsKey(s.substring(i,i+2))){
-                value+=fixedPrefixValues.get(s.substring(i,i+2));
-                i+=1;
-            }else{
-                value+=symbolValues.get(Character.toString(s.charAt(i)));
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+class RomanToInteger {
+    public static int romanToInt(String s) {
+        Map<Character, Integer> symbolValues = new HashMap<>();
+        int value = 0;
+        char firstChar, secondChar = '\0';
+        char[] symbols = s.toCharArray();
+        symbolValues.put('I', 1);
+        symbolValues.put('V', 5);
+        symbolValues.put('X', 10);
+        symbolValues.put('L', 50);
+        symbolValues.put('C', 100);
+        symbolValues.put('D', 500);
+        symbolValues.put('M', 1000);
+        for (int i = 0; i < symbols.length; i++) {
+            firstChar = symbols[i];
+            if (i != symbols.length - 1) {
+                secondChar = symbols[i + 1];
             }
+            if (secondChar != '\0' && (symbolValues.get(firstChar) < symbolValues.get(secondChar))) {
+                value += symbolValues.get(secondChar) - symbolValues.get(firstChar);
+                secondChar = '\0';
+                i += 1;
+
+            } else {
+                value += symbolValues.get(firstChar);
+
+            }
+            return value;
         }
-        return value;
+    }
+
+    public static void main(String[] args) throws IOException {
+        System.out.println(romanToInt("MDCXCV"));
     }
 }
+//1000 + 600 + 90
