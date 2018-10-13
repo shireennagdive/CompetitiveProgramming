@@ -7,7 +7,7 @@ public class CourseSchedule {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         List<Integer>[] adjacencyList = new List[numCourses];
         int[] indegree = new int[numCourses];
-        int preCourse, currCourse, count=0,edges=0;
+        int preCourse, currCourse, count=0;
         for(int i=0;i<numCourses;i++){
             adjacencyList[i] = new ArrayList<Integer>();
         }
@@ -28,7 +28,7 @@ public class CourseSchedule {
 
         while(!subjectTopoList.isEmpty()){
             currCourse = subjectTopoList.poll();
-            edges++;
+            count++;
             for(int nextCourse : adjacencyList[currCourse]){
                 indegree[nextCourse]--;
                 if(indegree[nextCourse] == 0){
@@ -36,6 +36,6 @@ public class CourseSchedule {
                 }
             }
         }
-        return edges == numCourses;
+        return count == numCourses;
     }
 }
