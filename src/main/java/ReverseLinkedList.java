@@ -19,5 +19,19 @@ public class ReverseLinkedList {
         head = prev;
         return prev;
     }
+//Recursive Solution
+    /*public ListNode reverseList(ListNode head) {
+        ListNode current = head;
+        head=reverse(current,head);
+        return head;
+    }
+    public ListNode reverse(ListNode current,ListNode head) {
+        if(current==null){  return null;}
+        if(current.next==null){head = current; return head;}
+        head=reverse(current.next,head);
+        current.next.next=current;
+        current.next=null;
+        return head;
+    }*/
 
 }
