@@ -1,34 +1,30 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 public class IntersectionOfArrays {
     class Solution {
         public int[] intersection(int[] nums1, int[] nums2) {
             if(nums1.length==0 || nums2.length==0) return new int[0];
-            int max = Integer.MIN_VALUE,min = Integer.MAX_VALUE;
-            for(int i = 0;i<nums1.length;i++){
-                if(max<nums1[i]){
-                    max = nums1[i];
-                }
-                if(min>nums1[i]){
-                    min = nums1[i];
-                }
+            Set<Integer> set1 = new HashSet<>();
+            Set<Integer> set2 = new HashSet<>();
+            int k=0;
+            int[] result = new int[nums1.length];
+            for(int i=0;i<nums1.length;i++){
+                set1.add(nums1[i]);
             }
-            boolean[] temp = new boolean[max-min+1];
-            for(int i = 0;i<nums1.length;i++){
-                temp[nums1[i]-min] = true;
+            for(int j=0;j<nums2.length;j++){
+                set2.add(nums2[j]);
             }
-            List<Integer> res = new ArrayList<>();
-            for(int i =0;i<nums2.length;i++){
-                if(nums2[i]<=max && nums2[i]>= min && temp[nums2[i]-min]){
-                    temp[nums2[i]-min] = false;
-                    res.add(nums2[i]);
+            Iterator<Integer> it = set1.iterator();
+            while(it.hasNext()){
+                int temp = it.next();
+                if(set2.contains(temp)){
+                    result[k++] = temp;
                 }
             }
-            int[] result = new int[res.size()];
-            for(int i = 0; i < res.size(); i++) result[i] = res.get(i);
-            return result;
-
+            return Arrays.copyOfRange(result,0,k);
         }
 
 
