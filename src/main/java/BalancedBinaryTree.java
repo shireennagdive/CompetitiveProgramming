@@ -1,25 +1,24 @@
-public class BalancedBinaryTree {
-    /**
-     * Definition for a binary tree node.
-     * public class TreeNode {
-     *     int val;
-     *     TreeNode left;
-     *     TreeNode right;
-     *     TreeNode(int x) { val = x; }
-     * }
-     */
-    class Solution {
-        public boolean isBalanced(TreeNode root) {
-            if(root==null) return true;
-            return getHeightDiff(root,0)>=0;
-        }
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class BalancedBinaryTree {
 
-        public int getHeightDiff(TreeNode node, int level){
-            if(node==null) return level;
-            int leftH  = getHeightDiff(node.left, level+1);
-            int rightH = getHeightDiff(node.right, level+1);
-            if(Math.abs(leftH-rightH) > 1 || leftH==-1 || rightH == -1)return -1;
-            return Math.max(leftH,rightH);
-        }
+    public boolean isBalanced(TreeNode root) {
+        if(root==null) return true;
+        return getHeightDiff(root)>0;
+    }
+
+    public int getHeightDiff(TreeNode node){
+        if(node==null) return 0;
+        int left  = getHeightDiff(node.left);
+        int right = getHeightDiff(node.right);
+        if(Math.abs(left-right) > 1 || left==-1 || right==-1)return -1;
+        return 1 + Math.max(left,right);
     }
 }
