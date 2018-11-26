@@ -21,4 +21,26 @@ public class BattleShipsInBoard {
             dfs(board,row,col-1);
             dfs(board,row,col+1);
     }
+
+
+
+    /*Without Modifying Array
+    class Solution {
+    public int countBattleships(char[][] board) {
+        int count=0;
+        char top,left;
+        for(int i=0;i<board.length;i++){
+            for(int j=0;j<board[0].length;j++){
+                if(board[i][j]=='X'){
+                    top = i> 0 ? board[i-1][j] : '.';
+                    left = j> 0 ? board[i][j-1] : '.';
+                    if(top=='.' && left=='.') count++;
+                }
+            }
+        }
+        return count;
+    }
+
+}
+    * */
 }
