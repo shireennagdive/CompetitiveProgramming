@@ -15,5 +15,9 @@ public class FirstBadVersion {
             }
             return high;
         }
+
+        public boolean isBadVersion(int mid){ //defined in problem
+            return true;
+        }
     }
 
