@@ -1,6 +1,6 @@
 import java.util.Iterator;
 import java.util.List;
-
+//complexity - O(N) N is sum of total number of elements in all lists
 public class Flatten2DVector {
     public class Vector2D implements Iterator<Integer> {
 
