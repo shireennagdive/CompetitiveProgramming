@@ -15,12 +15,10 @@ public class LetterCombinations {
         }
 
         public void dfs(StringBuilder sb, String digits, int pos){
-            if(sb.length()==finalLen){
+            if(sb.length()==finalLen) {
                 res.add(sb.toString());
                 return;
             }
-
-            if(pos>finalLen) return;
 
             for(int i=0;i<values[digits.charAt(pos)-'0'].length();i++){
                 int len = sb.length();
